@@ -27,6 +27,8 @@ main{max-width:1240px;margin:auto;padding:14px 28px 40px}
 #ph{margin:10px 0 18px}#ph h2{font-size:28px;font-weight:800;letter-spacing:-.02em}#ph p{margin:4px 0 0;color:var(--mu)}
 section{display:none}section.on{display:block}
 .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))}
+.pair-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.pair-grid>.card{min-width:0}
 .kpis{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-bottom:18px}
 .card{background:linear-gradient(155deg,#ffffff14,#ffffff05);border:1px solid var(--ln);border-radius:22px;padding:20px;backdrop-filter:blur(14px);position:relative}
 .card h3{font-size:18px;margin-bottom:4px}.card>p{margin:0 0 14px;color:var(--mu);font-size:14px}
@@ -60,4 +62,5 @@ select option{background:#14143a}
 .tag{border-radius:999px;padding:4px 14px;font-weight:700;font-size:14px;color:#07101f}
 .note{color:var(--mu);font-size:12.5px;margin-top:12px}
 @media(max-width:820px){body{padding-left:0}nav{transform:translateX(-100%);transition:transform .25s}body.mo nav{transform:none}#mb{display:block}body.mo #bd{display:block}header{padding-top:66px}.arc{display:none}}
+@media(max-width:960px){.pair-grid{grid-template-columns:1fr}}
 @media(max-width:520px){.cal{gap:4px}.cal button small{display:none}main{padding:12px}header{padding-left:16px;padding-right:16px}}

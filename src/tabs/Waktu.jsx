@@ -6,7 +6,7 @@ export default function Waktu({ D }) {
   const dm = Math.max(...D.d.map(x => x['delay_rate_%']));
   const pct = { ticks: { callback: v => v + '%' } };
   return (
-    <div className="grid">
+    <div className="grid pair-grid">
       <Card title="Per bulan" sub="Batang: jumlah penerbangan. Garis: persentase delay.">
         <ChartCanvas config={{ type: 'bar', data: { labels: MS, datasets: [
           { type: 'bar', label: 'Penerbangan', data: D.m.map(x => x.flights), backgroundColor: '#a78bfa66', borderRadius: 6, yAxisID: 'y' },

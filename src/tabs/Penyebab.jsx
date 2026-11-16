@@ -5,7 +5,7 @@ import { CC, BORDER, f1 } from '../utils/helpers';
 export default function Penyebab({ D }) {
   const cs = D.cs, nm = Object.fromEntries(D.c.map(x => [x.Reporting_Airline, x.name])), ks = Object.keys(CC);
   return (
-    <div className="grid">
+    <div className="grid pair-grid">
       <Card title="Total menit delay menurut penyebab" sub="Penyebab terbesar menurut jumlah menit.">
         <ChartCanvas config={{ type: 'doughnut', data: { labels: cs.map(x => x.cause), datasets: [{ data: cs.map(x => x['share_of_minutes_%']), backgroundColor: cs.map(x => CC[x.cause]), borderColor: BORDER, borderWidth: 3 }] }, options: { cutout: '62%', plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => c.label + ': ' + f1(c.raw) + '%' } } } } }} />
       </Card>

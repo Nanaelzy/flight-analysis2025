@@ -10,10 +10,8 @@ import Model from './tabs/Model';
 import Prediksi from './tabs/Prediksi';
 
 const VIEWS = { ov: Ringkasan, t: Waktu, c: Maskapai, r: Penyebab, m: Model, p: Prediksi };
-const pill = { position: 'fixed', right: 14, bottom: 14, zIndex: 50, padding: '8px 14px', borderRadius: 999, font: '600 13px sans-serif', background: '#1a1a40', color: '#fff', border: '1px solid #ffffff44' };
-
 export default function App() {
-  const { D, status } = useFlightData();
+  const { D } = useFlightData();
   const [tab, setTab] = useState(() => (TABS.some(t => t[0] === location.hash.slice(1)) ? location.hash.slice(1) : 'ov'));
   const [open, setOpen] = useState(false);
   useEffect(() => { document.body.classList.toggle('mo', open); }, [open]);
@@ -31,7 +29,6 @@ export default function App() {
         <div id="ph"><h2>{t[1]}</h2><p>{t[2]}</p></div>
         <section className="on"><View key={tab} D={D} /></section>
       </main>
-      <div style={pill}>{status}</div>
     </>
   );
 }
