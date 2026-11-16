@@ -11,7 +11,7 @@ import Prediksi from './tabs/Prediksi';
 
 const VIEWS = { ov: Ringkasan, t: Waktu, c: Maskapai, r: Penyebab, m: Model, p: Prediksi };
 export default function App() {
-  const { D } = useFlightData();
+  const { D, status } = useFlightData();
   const [tab, setTab] = useState(() => (TABS.some(t => t[0] === location.hash.slice(1)) ? location.hash.slice(1) : 'ov'));
   const [open, setOpen] = useState(false);
   useEffect(() => { document.body.classList.toggle('mo', open); }, [open]);
@@ -27,7 +27,14 @@ export default function App() {
       <Hero tab={tab} />
       <main>
         <div id="ph"><h2>{t[1]}</h2><p>{t[2]}</p></div>
-        <section className="on"><View key={tab} D={D} /></section>
+        <section className="on">
+          {D
+            ? <View key={tab} D={D} />
+            : status !== 'Menghubungkan ke Firebase...' && <div className="card">
+                <h3>Data Firebase tidak tersedia</h3>
+                <p>{status}</p>
+              </div>}
+        </section>
       </main>
     </>
   );

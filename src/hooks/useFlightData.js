@@ -2,23 +2,43 @@ import { useEffect, useState } from 'react';
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { firebaseConfig } from '../firebaseConfig';
-import { fallback } from '../data/fallback';
 import { toD } from '../utils/toD';
 
-// Data real-time dari Firebase. Bila config belum diisi, memakai data bawaan.
+// Data real-time hanya dari Firebase.
 export default function useFlightData() {
-  const [D, setD] = useState(fallback);
-  const [status, setStatus] = useState('Memakai data bawaan');
+  const [D, setD] = useState(null);
+  const [status, setStatus] = useState('Menghubungkan ke Firebase...');
   useEffect(() => {
-    if (/ISI/.test(firebaseConfig.apiKey)) { setStatus('Config belum terisi: memakai data bawaan'); return; }
-    setStatus('Menghubungkan ke Firebase...');
-    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-    const off = onValue(ref(getDatabase(app), '/'), s => {
-      const r = s.val();
-      if (!r) { setStatus('Terhubung, tapi database kosong'); return; }
-      try { setD(toD(r)); setStatus('Terhubung ke Firebase ✓ ' + new Date().toLocaleTimeString()); }
-      catch (e) { console.error(e); setStatus('Gagal memproses data: ' + e.message); }
-    }, e => setStatus('Gagal: ' + e.message));
+    if (/ISI/.test(firebaseConfig.apiKey)) {
+      setStatus('Config Firebase belum terisi.');
+      return;
+    }
+    let off = () => {};
+    try {
+      const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+      off = onValue(ref(getDatabase(app), '/'), s => {
+        const r = s.val();
+        if (!r) {
+          setD(null);
+          setStatus('Database Firebase kosong.');
+          return;
+        }
+        try {
+          setD(toD(r));
+          setStatus('Data berhasil dimuat dari Firebase.');
+        } catch (e) {
+          console.error(e);
+          setD(null);
+          setStatus('Gagal memproses data Firebase: ' + e.message);
+        }
+      }, e => {
+        setD(null);
+        setStatus('Gagal terhubung ke Firebase: ' + e.message);
+      });
+    } catch (e) {
+      console.error(e);
+      setStatus('Gagal menginisialisasi Firebase: ' + e.message);
+    }
     return () => off();
   }, []);
   return { D, status };
