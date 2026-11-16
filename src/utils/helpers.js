@@ -1,0 +1,12 @@
+export const K = { cy: '#38bdf8', am: '#fbbf24', co: '#fb7185', vi: '#a78bfa', gr: '#34d399' };
+export const MN = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+export const MS = MN.map(m => m.slice(0, 3));
+export const DN = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+export const CC = { Carrier: K.cy, Cuaca: K.vi, NAS: K.am, Security: K.gr, 'Late Aircraft': K.co };
+export const BORDER = '#171740';
+export const fmt = n => Math.round(n).toLocaleString('id-ID');
+export const f1 = n => n.toLocaleString('id-ID', { maximumFractionDigits: 2 });
+export const rate = v => f1(v) + '%';
+export const hue = v => { const t = Math.max(0, Math.min(1, (v - 14) / 22)); return `hsl(${190 - t * 170} 75% 55%)`; };
+export const lvl = v => (v < 20 ? 'Rendah' : v < 26 ? 'Sedang' : 'Tinggi');
+export const byRate = d => [...d].sort((a, b) => b['delay_rate_%'] - a['delay_rate_%']);
