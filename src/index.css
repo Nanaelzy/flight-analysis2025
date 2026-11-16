@@ -9,7 +9,7 @@ h1,h2,h3,.big{font-family:'Bricolage Grotesque',Figtree,sans-serif;margin:0}
 header{position:relative;padding:36px 28px 4px;max-width:1240px;margin:auto}
 h1{font-size:clamp(28px,4.6vw,50px);font-weight:800;letter-spacing:-.03em;line-height:1.05;max-width:22ch;background:linear-gradient(95deg,#fff,#a5b4fc 55%,#f9a8d4);-webkit-background-clip:text;background-clip:text;color:transparent}
 header p{color:var(--mu);margin:12px 0 0;max-width:56ch}
-.arc{position:absolute;right:28px;top:16px;width:min(360px,34%);height:auto;overflow:visible}
+.arc{position:absolute;right:120px;top:79px;width:min(360px,34%);height:auto;overflow:visible}
 nav{position:fixed;left:0;top:0;bottom:0;width:240px;z-index:20;background:#0b0b24c4;backdrop-filter:blur(20px);border-right:1px solid var(--ln);padding:calc(24px + env(safe-area-inset-top,0px)) 14px 20px;overflow-y:auto}
 .brand{display:flex;gap:12px;align-items:center;padding:0 8px 24px;font:800 16px/1.15 'Bricolage Grotesque',sans-serif}
 .brand i{display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,var(--cy),var(--vi) 55%,var(--pk));box-shadow:0 6px 22px #a78bfa66}

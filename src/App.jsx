@@ -24,7 +24,7 @@ export default function App() {
       <button id="mb" aria-label="Buka menu" onClick={() => setOpen(o => !o)}>Menu</button>
       <div id="bd" onClick={() => setOpen(false)} />
       <Sidebar tab={tab} go={go} />
-      <Hero />
+      <Hero tab={tab} />
       <main>
         <div id="ph"><h2>{t[1]}</h2><p>{t[2]}</p></div>
         <section className="on"><View key={tab} D={D} /></section>
